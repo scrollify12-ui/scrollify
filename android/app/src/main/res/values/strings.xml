@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accessibility_service_description">Scrollify uses this service to count when you scroll reels and shorts to help you track your usage and earn rewards.</string>
+</resources>

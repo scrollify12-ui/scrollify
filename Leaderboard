@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scrollz - Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-colors">
+    .bg-dark-app { background-color: #0F0F0F; }
+    .bg-dark-card { background-color: #1A1A1A; }
+    .text-gold { color: #F5D061; }
+    .bg-gold { background-color: #F5D061; }
+    .border-gold { border-color: #F5D061; }
+    .text-gray-light { color: #A0A0A0; }
+    
+    /* Specific user colors from image */
+    .bg-avatar-v { background-color: #8B5CF6; }
+    .bg-avatar-a { background-color: #9333EA; }
+    .bg-avatar-l { background-color: #A855F7; }
+    .bg-avatar-r { background-color: #7C3AED; }
+    .bg-avatar-s { background-color: #6D28D9; }
+    .bg-avatar-m { background-color: #C084FC; }
+    .bg-avatar-p { background-color: #D8B4FE; }
+    .bg-avatar-k { background-color: #E9D5FF; color: #4C1D95; }
+  </style>
+</head>
+<body class="bg-dark-app text-white h-screen flex flex-col items-center justify-center">
+<!-- BEGIN: Mobile App Container -->
+<main class="w-full max-w-[400px] h-full sm:h-[800px] bg-dark-app border border-gray-800 rounded-3xl overflow-hidden flex flex-col relative" data-purpose="mobile-container">
+<!-- BEGIN: Top Bar -->
+<header class="flex justify-between items-center px-6 pt-8 pb-4" data-purpose="app-header">
+<h1 class="text-xl font-bold tracking-widest text-white">SCROLLZ</h1>
+<button class="text-white hover:text-gold transition-colors">
+<i class="fa-regular fa-bell text-xl"></i>
+</button>
+</header>
+<!-- END: Top Bar -->
+<!-- BEGIN: Time Filter Toggle -->
+<div class="px-6 pb-6" data-purpose="time-filter">
+<div class="flex bg-dark-card rounded-full p-1 border border-gray-800">
+<button class="flex-1 py-2 rounded-full bg-gray-800 text-gold text-sm font-medium">Today</button>
+<button class="flex-1 py-2 rounded-full text-gray-light text-sm font-medium">This Week</button>
+<button class="flex-1 py-2 rounded-full text-gray-light text-sm font-medium">All Time</button>
+</div>
+</div>
+<!-- END: Time Filter Toggle -->
+<!-- BEGIN: Leaderboard List -->
+<section class="flex-1 overflow-y-auto px-6 pb-24 no-scrollbar" data-purpose="leaderboard-list">
+<!-- User 1 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400"><i class="fa-solid fa-medal text-gold"></i></span>
+<div class="w-10 h-10 rounded-full bg-avatar-v flex items-center justify-center text-white font-semibold">V</div>
+<span class="font-medium text-white">Vikram</span>
+</div>
+<span class="font-semibold text-white">120</span>
+</div>
+<!-- User 2 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400"><i class="fa-solid fa-medal text-gray-300"></i></span>
+<div class="w-10 h-10 rounded-full bg-avatar-a flex items-center justify-center text-white font-semibold">A</div>
+<span class="font-medium text-white">Ananya</span>
+</div>
+<span class="font-semibold text-white">98</span>
+</div>
+<!-- User 3 (Current User) -->
+<div class="flex items-center justify-between py-3 border border-gold rounded-xl px-2 -mx-2 bg-[#1f1a0a]">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400"><i class="fa-solid fa-medal text-orange-400"></i></span>
+<div class="w-10 h-10 rounded-full bg-avatar-l flex items-center justify-center text-white font-semibold">L</div>
+<span class="font-medium text-gold">Lakshay Yadav (You)</span>
+</div>
+<span class="font-semibold text-white">85</span>
+</div>
+<!-- User 4 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400">4</span>
+<div class="w-10 h-10 rounded-full bg-avatar-r flex items-center justify-center text-white font-semibold">R</div>
+<span class="font-medium text-white">Rohit</span>
+</div>
+<span class="font-semibold text-white">72</span>
+</div>
+<!-- User 5 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400">5</span>
+<div class="w-10 h-10 rounded-full bg-avatar-s flex items-center justify-center text-white font-semibold">S</div>
+<span class="font-medium text-white">Sneha</span>
+</div>
+<span class="font-semibold text-white">65</span>
+</div>
+<!-- User 6 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400">6</span>
+<div class="w-10 h-10 rounded-full bg-avatar-m flex items-center justify-center text-white font-semibold">M</div>
+<span class="font-medium text-white">Manav</span>
+</div>
+<span class="font-semibold text-white">60</span>
+</div>
+<!-- User 7 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400">7</span>
+<div class="w-10 h-10 rounded-full bg-avatar-p flex items-center justify-center text-gray-900 font-semibold">P</div>
+<span class="font-medium text-white">Priya</span>
+</div>
+<span class="font-semibold text-white">48</span>
+</div>
+<!-- User 8 -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-4">
+<span class="w-6 text-center text-sm font-medium text-gray-400">8</span>
+<div class="w-10 h-10 rounded-full bg-avatar-k flex items-center justify-center font-semibold">K</div>
+<span class="font-medium text-white">Karan</span>
+</div>
+<span class="font-semibold text-white">40</span>
+</div>
+</section>
+<!-- END: Leaderboard List -->
+<!-- BEGIN: Invite Button Fixed Bottom -->
+<div class="absolute bottom-20 left-0 w-full px-6 bg-gradient-to-t from-dark-app via-dark-app to-transparent pt-8 pb-4" data-purpose="invite-action">
+<button class="w-full bg-gradient-to-r from-[#F5D061] to-[#FFEDAB] text-black font-semibold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-yellow-900/20">
+<i class="fa-solid fa-user-plus"></i>
+        Invite Friends &amp; Earn
+      </button>
+</div>
+<!-- END: Invite Button Fixed Bottom -->
+<!-- BEGIN: Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-dark-app border-t border-gray-800 flex justify-around py-4 pb-6" data-purpose="bottom-nav">
+<a class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300" href="#">
+<i class="fa-solid fa-house text-lg"></i>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300" href="#">
+<i class="fa-regular fa-clock text-lg"></i>
+<span class="text-[10px] font-medium">Counter</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300" href="#">
+<i class="fa-solid fa-gift text-lg"></i>
+<span class="text-[10px] font-medium">Rewards</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gold" href="#">
+<i class="fa-solid fa-trophy text-lg"></i>
+<span class="text-[10px] font-medium">Leaderboard</span>
+</a>
+</nav>
+<!-- END: Bottom Navigation -->
+</main>
+<!-- END: Mobile App Container -->
+<style data-purpose="scrollbar-hide">
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</body></html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scrollz - Rewards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script crossorigin="anonymous" src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script> <!-- Placeholder for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+    }
+  </style>
+<style data-purpose="layout-utilities">
+    .app-container {
+      width: 100%;
+      max-width: 414px; /* Typical mobile width */
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background-color: #111111;
+      border: 1px solid #333;
+      overflow: hidden;
+    }
+    
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 16px;
+    }
+
+    .glass-panel-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      transition: background-color 0.2s;
+    }
+    .glass-panel-item:active {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen">
+<!-- BEGIN: AppContainer -->
+<div class="app-container" data-purpose="app-container">
+<!-- BEGIN: Header -->
+<header class="flex justify-between items-center p-6 pb-2" data-purpose="top-header">
+<h1 class="text-xl font-bold tracking-wider text-white">SCROLL<span class="text-yellow-400">Z</span></h1>
+<button class="text-gray-400 hover:text-white focus:outline-none">
+<i class="fa-regular fa-bell text-xl"></i>
+</button>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow overflow-y-auto px-6 pb-24 scrollbar-hide" data-purpose="main-scrollable-area">
+<!-- Points Summary Card -->
+<section class="glass-panel p-5 mt-4 flex items-center justify-between" data-purpose="points-summary">
+<div>
+<p class="text-sm text-gray-400 mb-1">Your Points</p>
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold text-xs">S</div>
+<h2 class="text-3xl font-bold text-white">1,250</h2>
+</div>
+</div>
+<div class="w-16 h-16 opacity-80">
+<!-- Placeholder for 3D coin stack image -->
+<img alt="Coins" class="w-full h-full object-contain filter drop-shadow-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkssIDSqBWvVltaEOalm0X2RbYlxL4HBNe2DUqsiGkjzW4DA15KSa_u7WRQdMUJ1b-TrK68e-ArS2Fh0xKjxLaNrWBksqjlr5l0hy3rylG_p3gD--SCBxZdqsDlikndnvyaHeryMoFchbLNtZcdg91ISNXHKokdJ24eHZeSz1EwqWwLhyYduH54m_b_88LTM-wjYilpkzSrdyIzYRp6m6VnDkw-1rpXQezD5YF7dMf1owypTaBsSwz"/>
+</div>
+</section>
+<!-- Redeem Rewards Section -->
+<section class="mt-8" data-purpose="redeem-rewards-list">
+<h3 class="text-sm font-semibold text-gray-300 mb-4 px-1">Redeem Rewards</h3>
+<div class="space-y-3">
+<!-- Reward Item: Instagram Premium -->
+<div class="glass-panel-item p-4 flex items-center justify-between cursor-pointer" data-purpose="reward-item">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+<img alt="Instagram" class="w-8 h-8 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4awnOdJUrf4dwni0_eh1IVdXBO1t8I7SgcBWieJRoDvJ0MkVW4PPn4C6yeZANKBFLIrdbEgLF0uToaZkebZ3jX3e3l21IIWpdOb80t20fcl7PT5P6xHiDqSkLpsSQ3mDgLpQuZBcbMuXSJ_U0JQJ9CNMuTLWLCTc9G5kwaXg_b2s3dnOn4RQ8-ugfO0Tvy2IJNR6r4dOvQddyvtXRS8AWyC18heZZGNBI18mXiHKRcQaKLC4htrEo"/>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-white">Instagram Premium</h4>
+<p class="text-xs text-gray-400 mt-0.5">1 Month</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-sm font-semibold text-gray-200">4,000</span>
+<div class="w-4 h-4 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold" style="font-size: 8px;">S</div>
+<i class="fa-solid fa-chevron-right text-gray-500 text-xs ml-1"></i>
+</div>
+</div>
+<!-- Reward Item: YouTube Premium -->
+<div class="glass-panel-item p-4 flex items-center justify-between cursor-pointer" data-purpose="reward-item">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+<img alt="YouTube" class="w-8 h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfxqCjDJBepqCxbIjxII9zjptPqsl0B-cdRZbcMIXBwjzCscMhVJcS612bFq4piyMaBjGAayOLxX2gfQrCKJV-6fyESFmuh95QKWGaZw2S0BIutecpWQ4GISnq0FE7Y7owhFjI0gah9-APa03BJcy1R8PCikCSQmZ0P-p3Ig79X8Qyy3KNM1tSYaJcMkrp787JC7cdSmwv68VrYt1yqY6lAOwFpGdOkNy5MazAGb88HwBff-AN0J1G"/>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-white">YouTube Premium</h4>
+<p class="text-xs text-gray-400 mt-0.5">1 Month</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-sm font-semibold text-gray-200">5,000</span>
+<div class="w-4 h-4 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold" style="font-size: 8px;">S</div>
+<i class="fa-solid fa-chevron-right text-gray-500 text-xs ml-1"></i>
+</div>
+</div>
+<!-- Reward Item: Spotify Premium -->
+<div class="glass-panel-item p-4 flex items-center justify-between cursor-pointer" data-purpose="reward-item">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-black flex items-center justify-center">
+<i class="fa-brands fa-spotify text-green-500 text-2xl"></i>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-white">Spotify Premium</h4>
+<p class="text-xs text-gray-400 mt-0.5">1 Month</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-sm font-semibold text-gray-200">4,500</span>
+<div class="w-4 h-4 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold" style="font-size: 8px;">S</div>
+<i class="fa-solid fa-chevron-right text-gray-500 text-xs ml-1"></i>
+</div>
+</div>
+<!-- Reward Item: Amazon Voucher -->
+<div class="glass-panel-item p-4 flex items-center justify-between cursor-pointer" data-purpose="reward-item">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+<i class="fa-brands fa-amazon text-black text-xl"></i>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-white">Amazon Voucher</h4>
+<p class="text-xs text-gray-400 mt-0.5">₹100</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-sm font-semibold text-gray-200">5,500</span>
+<div class="w-4 h-4 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold" style="font-size: 8px;">S</div>
+<i class="fa-solid fa-chevron-right text-gray-500 text-xs ml-1"></i>
+</div>
+</div>
+<!-- Reward Item: Google Play -->
+<div class="glass-panel-item p-4 flex items-center justify-between cursor-pointer" data-purpose="reward-item">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+<i class="fa-brands fa-google-play text-black text-xl"></i>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-white">Google Play Gift Card</h4>
+<p class="text-xs text-gray-400 mt-0.5">₹100</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-sm font-semibold text-gray-200">5,000</span>
+<div class="w-4 h-4 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold" style="font-size: 8px;">S</div>
+<i class="fa-solid fa-chevron-right text-gray-500 text-xs ml-1"></i>
+</div>
+</div>
+<!-- Reward Item: Paytm Cash -->
+<div class="glass-panel-item p-4 flex items-center justify-between cursor-pointer" data-purpose="reward-item">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+<span class="text-blue-500 font-bold text-[10px]">Paytm</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-white">Paytm Cash</h4>
+<p class="text-xs text-gray-400 mt-0.5">₹50</p>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="text-sm font-semibold text-gray-200">2,800</span>
+<div class="w-4 h-4 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold" style="font-size: 8px;">S</div>
+<i class="fa-solid fa-chevron-right text-gray-500 text-xs ml-1"></i>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: BottomNavigation -->
+<nav class="absolute bottom-0 w-full bg-[#111111] border-t border-gray-800 pb-safe pt-2 px-6 flex justify-between items-center" data-purpose="bottom-nav">
+<a class="flex flex-col items-center justify-center w-16 h-14 text-gray-500 hover:text-white transition-colors" href="#">
+<i class="fa-solid fa-house mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-14 text-gray-500 hover:text-white transition-colors" href="#">
+<i class="fa-solid fa-clock-rotate-left mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Counter</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-14 text-yellow-400 transition-colors" href="#">
+<i class="fa-solid fa-gift mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Rewards</span>
+</a>
+<a class="flex flex-col items-center justify-center w-16 h-14 text-gray-500 hover:text-white transition-colors" href="#">
+<i class="fa-solid fa-trophy mb-1 text-lg"></i>
+<span class="text-[10px] font-medium">Leaderboard</span>
+</a>
+</nav>
+<!-- END: BottomNavigation -->
+</div>
+<!-- END: AppContainer -->
+<style data-purpose="utility-overrides">
+    /* Utility to handle safe area on iOS mobile */
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+    }
+    /* Hide scrollbar for a cleaner look */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</body></html>

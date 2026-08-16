@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "693146590338",
+    "project_id": "scrollz-7087d",
+    "storage_bucket": "scrollz-7087d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693146590338:android:5fb3218198f1e85d5fa89b",
+        "android_client_info": {
+          "package_name": "com.scrollz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693146590338-2cdsqbi18g65flcq3954lhnmrimit68f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scrollz.app",
+            "certificate_hash": "d1a4d8a7917cf9bcd45ccd4148bb5a714b422ebf"
+          }
+        },
+        {
+          "client_id": "693146590338-9qkeetvjk1dsfgj7k9epj8ti076m257r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scrollz.app",
+            "certificate_hash": "beb8e8b49f2e71bf6e0b4a1c54c7b87e3256d431"
+          }
+        },
+        {
+          "client_id": "693146590338-4mrrr2c3gntpii1f9gc871q1j1q8nerg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx_L8HIxQeYB5WpXeEVicerBmxlQqXbIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693146590338-4mrrr2c3gntpii1f9gc871q1j1q8nerg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

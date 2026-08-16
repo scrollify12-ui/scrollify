@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id              String   @id @default(uuid()) @db.Uuid
+  firebaseUid     String   @unique
+  fullName        String
+  username        String   @unique
+  email           String   @unique
+  profilePhoto    String?
+  instagramHandle String?
+  points          Int      @default(0)
+  streak          Int      @default(0)
+  totalReels      Int      @default(0)
+  reelsToday      Int      @default(0)
+  role            String   @default("user")
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  lastLogin       DateTime?
+
+  // Friend relations
+  sentFriendRequests     Friendship[] @relation("Sender")
+  receivedFriendRequests Friendship[] @relation("Receiver")
+
+  @@index([firebaseUid])
+  @@index([username])
+  @@index([email])
+}
+
+model Friendship {
+  id          String   @id @default(uuid()) @db.Uuid
+  senderId    String   @db.Uuid
+  receiverId  String   @db.Uuid
+  status      String   @default("pending") // pending, accepted, declined
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sender      User     @relation("Sender", fields: [senderId], references: [id])
+  receiver    User     @relation("Receiver", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
+  @@index([senderId])
+  @@index([receiverId])
+}

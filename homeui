@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scrollz - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'sc-black': '#0a0a0a',
+            'sc-dark': '#121212',
+            'sc-gray': '#1c1c1c',
+            'sc-light-gray': '#8e8e93',
+            'sc-gold': '#fbc02d',
+            'sc-gold-light': '#fdd835',
+            'sc-gold-dark': '#f9a825',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style data-purpose="custom-utilities">
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .gradient-text {
+      background: linear-gradient(to right, #fdd835, #f9a825);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card-border {
+      border: 1px solid rgba(251, 192, 45, 0.2);
+    }
+    .circular-chart {
+      display: block;
+      margin: 10px auto;
+      max-width: 80%;
+      max-height: 250px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #1c1c1c;
+      stroke-width: 2.5;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      animation: progress 1s ease-out forwards;
+    }
+    @keyframes progress {
+      0% {
+        stroke-dasharray: 0 100;
+      }
+    }
+    .glow {
+      filter: drop-shadow(0 0 10px rgba(251, 192, 45, 0.5));
+    }
+  </style>
+</head>
+<body class="h-screen w-full flex justify-center items-center bg-zinc-950">
+<!-- BEGIN: Mobile Container -->
+<div class="w-full h-full max-w-md bg-sc-dark relative overflow-hidden flex flex-col shadow-2xl rounded-3xl sm:h-[850px] sm:border sm:border-gray-800">
+<!-- BEGIN: Header -->
+<header class="flex justify-between items-center px-6 pt-12 pb-4">
+<h1 class="text-xl font-bold tracking-widest text-white">SCROLLZ</h1>
+<button class="text-sc-light-gray hover:text-white transition">
+<i class="fa-regular fa-bell text-xl"></i>
+</button>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Main Content -->
+<main class="flex-1 overflow-y-auto px-6 pb-24 scrollbar-hide" style="-ms-overflow-style: none; scrollbar-width: none;">
+<!-- BEGIN: Progress Section -->
+<section class="flex flex-col items-center mt-6 mb-8 relative">
+<div class="relative w-64 h-64 flex justify-center items-center">
+<!-- Circular Progress SVG -->
+<svg class="circular-chart glow absolute w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<defs>
+<lineargradient id="gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#f9a825"></stop>
+<stop offset="100%" stop-color="#fdd835"></stop>
+</lineargradient>
+</defs>
+<!-- Background Circle -->
+<path class="circle-bg" d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<!-- Progress Circle (85%) -->
+<path class="circle" d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831" stroke="url(#gradient)" stroke-dasharray="85, 100"></path>
+</svg>
+<!-- Inner Content -->
+<div class="flex flex-col items-center z-10">
+<div class="text-sc-gold text-4xl mb-1">
+<i class="fa-solid fa-star"></i>
+</div>
+<span class="text-6xl font-bold text-white tracking-tighter">85</span>
+</div>
+</div>
+<p class="text-sc-light-gray mt-2 text-sm font-medium">Reels Scrolled Today</p>
+</section>
+<!-- END: Progress Section -->
+<!-- BEGIN: Daily Limit Bar -->
+<section class="mb-8">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-sc-light-gray">Daily Limit: 100 reels</span>
+<span class="text-sc-gold font-semibold">15 reels left</span>
+</div>
+<div class="w-full bg-sc-gray rounded-full h-2">
+<div class="bg-gradient-to-r from-sc-gold-dark to-sc-gold h-2 rounded-full" style="width: 85%"></div>
+</div>
+</section>
+<!-- END: Daily Limit Bar -->
+<!-- BEGIN: Action Cards -->
+<div class="flex flex-col gap-4 mb-6">
+<!-- Scroll Less Card -->
+<div class="bg-sc-gray card-border rounded-2xl p-4 flex items-center justify-between cursor-pointer active:scale-95 transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border border-sc-gold flex items-center justify-center text-sc-gold">
+<i class="fa-solid fa-leaf"></i>
+</div>
+<div>
+<h3 class="text-white font-semibold">Scroll Less</h3>
+<p class="text-sc-light-gray text-xs">Save your screen time.</p>
+<p class="text-sc-gold text-xs mt-0.5 text-[10px]">No rewards.</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-sc-light-gray text-sm"></i>
+</div>
+<!-- Compete & Earn Card -->
+<div class="bg-sc-gray card-border rounded-2xl p-4 flex items-center justify-between cursor-pointer active:scale-95 transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-sc-gold/10 border border-sc-gold flex items-center justify-center text-sc-gold">
+<i class="fa-solid fa-trophy"></i>
+</div>
+<div>
+<h3 class="text-white font-semibold">Compete &amp; Earn</h3>
+<p class="text-sc-light-gray text-xs">Scroll more, hit targets</p>
+<p class="text-sc-light-gray text-xs">&amp; win rewards!</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-sc-light-gray text-sm"></i>
+</div>
+</div>
+<!-- END: Action Cards -->
+<!-- BEGIN: Today's Points & Bonus -->
+<div class="flex flex-col gap-4">
+<!-- Today's Points -->
+<div class="flex justify-between items-center py-2 border-b border-sc-gray">
+<div>
+<p class="text-sc-light-gray text-xs mb-1">Today's Points</p>
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-sc-gold flex items-center justify-center text-black text-[10px]">
+<i class="fa-solid fa-c"></i>
+</div>
+<span class="text-xl font-bold text-white">1,250</span>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-sc-light-gray text-sm"></i>
+</div>
+<!-- Daily Bonus -->
+<div class="flex justify-between items-center py-2">
+<div class="flex items-center gap-3">
+<div class="text-sc-gold text-lg">
+<i class="fa-solid fa-gift"></i>
+</div>
+<div>
+<p class="text-white text-sm font-medium">Daily Bonus</p>
+<p class="text-sc-light-gray text-[10px]">Log in everyday &amp; earn points</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-sc-gold font-semibold text-sm">
+<span>+50</span>
+<div class="w-4 h-4 rounded-full bg-sc-gold flex items-center justify-center text-black text-[8px]">
+<i class="fa-solid fa-c"></i>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Today's Points & Bonus -->
+</main>
+<!-- END: Main Content -->
+<!-- BEGIN: Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-sc-dark border-t border-sc-gray px-6 py-4 flex justify-between items-center pb-8 sm:pb-4 rounded-b-3xl">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center gap-1 text-sc-gold" href="#">
+<i class="fa-solid fa-house text-xl"></i>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<!-- Counter -->
+<a class="flex flex-col items-center gap-1 text-sc-light-gray hover:text-white transition" href="#">
+<i class="fa-regular fa-clock text-xl"></i>
+<span class="text-[10px] font-medium">Counter</span>
+</a>
+<!-- Rewards -->
+<a class="flex flex-col items-center gap-1 text-sc-light-gray hover:text-white transition" href="#">
+<i class="fa-solid fa-gift text-xl"></i>
+<span class="text-[10px] font-medium">Rewards</span>
+</a>
+<!-- Leaderboard -->
+<a class="flex flex-col items-center gap-1 text-sc-light-gray hover:text-white transition" href="#">
+<i class="fa-solid fa-trophy text-xl"></i>
+<span class="text-[10px] font-medium">Leaderboard</span>
+</a>
+</nav>
+<!-- END: Bottom Navigation -->
+</div>
+<!-- END: Mobile Container -->
+</body></html>

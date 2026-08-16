@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scrollz - Counter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-colors">
+    :root {
+      --bg-dark: #0f0f0f;
+      --bg-card: #1c1c1e;
+      --text-main: #ffffff;
+      --text-muted: #8e8e93;
+      --accent-gold: #f5c563;
+      --accent-gold-dark: #cc9933;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
+<style data-purpose="custom-components">
+    /* Custom Ring Progress */
+    .progress-ring {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+    }
+    .progress-ring svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+    .progress-ring circle {
+      fill: transparent;
+      stroke-width: 12;
+      stroke-linecap: round;
+    }
+    .progress-ring .track {
+      stroke: #333333;
+    }
+    .progress-ring .progress {
+      stroke: var(--accent-gold);
+      stroke-dasharray: 502; /* 2 * pi * r (approx 80) */
+      stroke-dashoffset: calc(502 - (502 * 85) / 100);
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .progress-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    /* App Usage Progress Bars */
+    .usage-bar-bg {
+      height: 4px;
+      background-color: #333333;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .usage-bar-fill {
+      height: 100%;
+      background-color: var(--accent-gold);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center justify-start sm:py-8 bg-black">
+<!-- BEGIN: Mobile Container -->
+<div class="w-full max-w-[375px] h-[812px] bg-[#0f0f0f] rounded-[40px] border-[8px] border-[#1a1a1a] overflow-hidden flex flex-col relative shadow-2xl">
+<!-- BEGIN: Header -->
+<header class="flex justify-between items-center px-6 py-5">
+<h1 class="text-xl font-bold tracking-widest text-white">SCROLLZ</h1>
+<button class="text-gray-400 hover:text-white focus:outline-none">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Main Content -->
+<main class="flex-1 overflow-y-auto pb-24 scrollbar-hide">
+<!-- Time Toggle -->
+<div class="px-6 mb-8">
+<div class="flex bg-[#1c1c1e] rounded-full p-1 text-sm text-gray-400 font-medium">
+<button class="flex-1 py-2 rounded-full bg-[#f5c563] bg-opacity-20 text-[#f5c563]">Today</button>
+<button class="flex-1 py-2 rounded-full hover:text-white">Yesterday</button>
+<button class="flex-1 py-2 rounded-full hover:text-white">Weekly Avg</button>
+</div>
+</div>
+<!-- Main Counter Ring -->
+<div class="flex flex-col items-center mb-8">
+<div class="progress-ring mb-4">
+<svg viewbox="0 0 180 180">
+<defs>
+<lineargradient id="grad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" style="stop-color:#f5c563;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#cc9933;stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+<circle class="track" cx="90" cy="90" r="80"></circle>
+<circle class="progress" cx="90" cy="90" r="80" stroke="url(#grad)"></circle>
+</svg>
+<div class="progress-content">
+<span class="text-5xl font-bold text-white block leading-none">85</span>
+<span class="text-sm text-gray-400 mt-1 block">Reels</span>
+</div>
+</div>
+<p class="text-gray-400 text-sm mb-2">of 100</p>
+<p class="text-[#f5c563] font-medium text-sm">15 reels left</p>
+</div>
+<!-- App Usage List -->
+<div class="px-6">
+<h2 class="text-gray-400 text-sm font-medium mb-4">App Usage</h2>
+<div class="bg-[#1c1c1e] rounded-[24px] p-5 space-y-5 border border-[#2a2a2a]">
+<!-- Instagram -->
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 p-2 flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect height="20" rx="5" ry="5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-white font-medium text-sm">Instagram</span>
+<div class="flex items-center">
+<span class="text-gray-300 text-sm mr-2">45 reels</span>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="usage-bar-bg">
+<div class="usage-bar-fill w-[45%]"></div>
+</div>
+</div>
+</div>
+<!-- YouTube -->
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-white font-medium text-sm">YouTube</span>
+<div class="flex items-center">
+<span class="text-gray-300 text-sm mr-2">20 reels</span>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="usage-bar-bg">
+<div class="usage-bar-fill w-[20%]"></div>
+</div>
+</div>
+</div>
+<!-- Facebook -->
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-white font-medium text-sm">Facebook</span>
+<div class="flex items-center">
+<span class="text-gray-300 text-sm mr-2">10 reels</span>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="usage-bar-bg">
+<div class="usage-bar-fill w-[10%]"></div>
+</div>
+</div>
+</div>
+<!-- Snapchat -->
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-xl bg-yellow-400 flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-black" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.052 1.35c.78 0 1.545.034 2.302.102 1.157.106 2.22.456 3.125.996 1.05.626 1.758 1.488 2.056 2.502.164.558.196 1.144.186 1.724a9.92 9.92 0 0 1-.293 2.112c-.22.868-.584 1.7-1.07 2.443-.19.294-.41.56-.653.805a.73.73 0 0 0-.156.242c-.066.16-.06.326.002.482.1.25.334.394.612.48.513.157 1.052.226 1.577.29a10.63 10.63 0 0 0 1.834-.03c.51-.06.944-.308 1.255-.732a1.7 1.7 0 0 1 .584-.523 1.17 1.17 0 0 1 1.216.03c.316.206.496.53.518.892.015.26-.068.514-.24.72a3.83 3.83 0 0 1-1.393 1.066 9.8 9.8 0 0 1-2.224.628c-.803.11-1.62.062-2.42-.095a5.57 5.57 0 0 1-1.348-.426.68.68 0 0 0-.495-.03c-.156.05-.286.155-.386.29a3.7 3.7 0 0 1-.58.604 10.7 10.7 0 0 1-1.57.97c-.982.464-2.02.776-3.085.91a13.3 13.3 0 0 1-2.903.02 10.77 10.77 0 0 1-3.136-.934 11.23 11.23 0 0 1-1.58-.973 3.5 3.5 0 0 1-.568-.598.67.67 0 0 0-.39-.29.68.68 0 0 0-.494.032c-.42.176-.86.325-1.312.434a9.92 9.92 0 0 1-2.417.097 3.8 3.8 0 0 1-2.217-.614 1.83 1.83 0 0 1-.684-1.07 1.15 1.15 0 0 1 .326-1.127 1.18 1.18 0 0 1 1.03-.314 1.74 1.74 0 0 1 .593.513c.32.416.74.656 1.24.717a10.6 10.6 0 0 0 1.84.026c.52-.06 1.054-.132 1.562-.284.28-.084.515-.227.618-.475.064-.154.072-.32.006-.48-.046-.11-.122-.197-.206-.27-.233-.23-.443-.487-.624-.766-.484-.743-.846-1.564-1.066-2.432a9.97 9.97 0 0 1-.295-2.115c-.01-.582.02-1.168.186-1.728.3-.1.02.7-.91 1.054-.627 1.957-.978 3.115-1.085.76-.068 1.52-.102 2.295-.102z"></path></svg>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-white font-medium text-sm">Snapchat</span>
+<div class="flex items-center">
+<span class="text-gray-300 text-sm mr-2">6 reels</span>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="usage-bar-bg">
+<div class="usage-bar-fill w-[6%]"></div>
+</div>
+</div>
+</div>
+<!-- Other -->
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-xl bg-gray-800 flex items-center justify-center mr-4">
+<svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-end mb-1">
+<span class="text-white font-medium text-sm">Other</span>
+<div class="flex items-center">
+<span class="text-gray-300 text-sm mr-2">4 reels</span>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div class="usage-bar-bg">
+<div class="usage-bar-fill w-[4%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: Main Content -->
+<!-- BEGIN: Bottom Navigation -->
+<nav class="absolute bottom-0 w-full bg-[#0f0f0f] border-t border-[#2a2a2a] px-6 py-4 flex justify-between items-center z-10">
+<!-- Home -->
+<a class="flex flex-col items-center text-gray-500 hover:text-white group" href="#">
+<svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<!-- Counter (Active) -->
+<a class="flex flex-col items-center text-[#f5c563]" href="#">
+<svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[10px] font-medium">Counter</span>
+</a>
+<!-- Rewards -->
+<a class="flex flex-col items-center text-gray-500 hover:text-white group" href="#">
+<svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[10px] font-medium">Rewards</span>
+</a>
+<!-- Leaderboard -->
+<a class="flex flex-col items-center text-gray-500 hover:text-white group" href="#">
+<svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[10px] font-medium">Leaderboard</span>
+</a>
+</nav>
+<!-- END: Bottom Navigation -->
+</div>
+<!-- END: Mobile Container -->
+</body></html>
