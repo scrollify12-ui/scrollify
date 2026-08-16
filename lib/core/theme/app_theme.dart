@@ -3,21 +3,31 @@ import 'app_colors.dart';
 import 'app_text_styles.dart';
 
 class AppTheme {
-  static ThemeData get darkTheme {
+  /// Build the dark theme, optionally applying remote config color overrides.
+  /// Null overrides mean "use compiled default".
+  static ThemeData buildTheme({
+    Color? primaryColorOverride,
+    Color? backgroundColorOverride,
+    Color? surfaceColorOverride,
+  }) {
+    final primary = primaryColorOverride ?? AppColors.primary;
+    final background = backgroundColorOverride ?? AppColors.background;
+    final surface = surfaceColorOverride ?? AppColors.surface;
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorScheme: const ColorScheme.dark(
-        primary: AppColors.primary,
+      colorScheme: ColorScheme.dark(
+        primary: primary,
         onPrimary: AppColors.onPrimary,
         secondary: AppColors.secondary,
         onSecondary: AppColors.onPrimary,
         error: AppColors.error,
         onError: AppColors.onError,
-        surface: AppColors.surface,
+        surface: surface,
         onSurface: AppColors.onSurface,
       ),
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: background,
       textTheme: TextTheme(
         displayLarge: AppTextStyles.displayLarge,
         displayMedium: AppTextStyles.displayMedium,
@@ -44,7 +54,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
+          backgroundColor: primary,
           foregroundColor: AppColors.onPrimary,
           textStyle: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.w600),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -53,13 +63,16 @@ class AppTheme {
           ),
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.surface,
-        selectedItemColor: AppColors.primary,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: surface,
+        selectedItemColor: primary,
         unselectedItemColor: AppColors.textSecondary,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
       ),
     );
   }
+
+  /// Convenience getter using compiled defaults (no overrides).
+  static ThemeData get darkTheme => buildTheme();
 }

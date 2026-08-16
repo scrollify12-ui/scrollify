@@ -385,6 +385,67 @@ app.post('/api/friends/request', authenticate, async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 });
+// ============================================================
+// REMOTE CONFIG — Public endpoint, no auth required
+// Update values here and redeploy to push live changes to all
+// installed APKs without requiring users to update.
+// ============================================================
+app.get('/api/config', (req, res) => {
+  const config = {
+    // ── App metadata ─────────────────────────────────────────
+    app_name: 'Scrollify',
+    app_tagline: 'Scroll smarter, not harder.',
+    support_email: 'support@scrollify.app',
+    min_supported_version: '1.0.0',   // semver: force-update below this
+
+    // ── Feature flags ─────────────────────────────────────────
+    features: {
+      leaderboard_enabled: true,
+      rewards_enabled: true,
+      search_enabled: true,
+      social_enabled: true,
+      reel_counter_enabled: true,
+    },
+
+    // ── Gamification limits ───────────────────────────────────
+    gamification: {
+      daily_reel_limit: 30,
+      points_per_reel: 10,
+      streak_bonus_multiplier: 1.5,
+      max_streak_bonus_days: 7,
+    },
+
+    // ── Theme overrides (hex strings) ─────────────────────────
+    // Leave null to use compiled defaults
+    theme: {
+      primary_color: null,          // e.g. "#FBC02D"
+      background_color: null,       // e.g. "#000000"
+      surface_color: null,          // e.g. "#121212"
+    },
+
+    // ── Announcement banner ───────────────────────────────────
+    banner: {
+      enabled: false,
+      message: '',
+      type: 'info',                 // "info" | "warning" | "error" | "success"
+      image_url: null,
+      action_url: null,
+      action_label: null,
+    },
+
+    // ── Backend URLs (for future multi-env routing) ───────────
+    api: {
+      production_url: 'https://scrollify-backend.onrender.com',
+    },
+
+    // ── Config versioning ─────────────────────────────────────
+    config_version: 1,
+    fetched_at: new Date().toISOString(),
+  };
+
+  res.status(200).json(config);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
