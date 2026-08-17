@@ -7,6 +7,7 @@ final localStorageProvider = Provider<LocalStorageService>((ref) {
 
 class LocalStorageService {
   final SharedPreferences _prefs;
+  SharedPreferences get prefs => _prefs;
 
   LocalStorageService(this._prefs);
 

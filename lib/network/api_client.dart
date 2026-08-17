@@ -8,6 +8,7 @@ final apiClientProvider = Provider<ApiClient>((ref) {
 
 class ApiClient {
   late final Dio _dio;
+  Dio get dio => _dio;
 
   ApiClient() {
     _dio = Dio(BaseOptions(
@@ -15,7 +16,6 @@ class ApiClient {
       connectTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
     ));
-
 
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {

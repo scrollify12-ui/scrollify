@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/theme/app_theme.dart';
 import '../core/remote_config/remote_config_provider.dart';
+import '../core/services/sync_service.dart';
 import 'router.dart';
 
 class ScrollifyApp extends ConsumerStatefulWidget {
@@ -37,6 +38,8 @@ class _ScrollifyAppState extends ConsumerState<ScrollifyApp> {
   @override
   Widget build(BuildContext context) {
     final remoteConfig = ref.watch(remoteConfigProvider);
+    // Initialize SyncService so it starts the background timer
+    ref.watch(syncServiceProvider);
 
     // Build theme — apply remote overrides if provided, else use compiled defaults
     final theme = AppTheme.buildTheme(

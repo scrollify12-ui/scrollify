@@ -145,6 +145,46 @@ app.get('/api/users/check-username', authenticate, async (req, res) => {
   }
 });
 
+// Sync Reels API
+app.post('/api/users/sync-reels', authenticate, async (req, res) => {
+  const firebaseUid = req.user.uid;
+  const { instagram, youtube, facebook, snapchat } = req.body;
+  
+  const totalDelta = (instagram || 0) + (youtube || 0) + (facebook || 0) + (snapchat || 0);
+  
+  if (totalDelta === 0) {
+    return res.status(200).json({ status: 'ok', message: 'No delta to sync' });
+  }
+
+  try {
+    const user = await prisma.user.update({
+      where: { firebaseUid },
+      data: {
+        totalReels: { increment: totalDelta },
+        reelsToday: { increment: totalDelta },
+        instagramReels: { increment: instagram || 0 },
+        youtubeReels: { increment: youtube || 0 },
+        facebookReels: { increment: facebook || 0 },
+        snapchatReels: { increment: snapchat || 0 }
+      }
+    });
+    
+    return res.status(200).json({ 
+      status: 'ok', 
+      user: {
+        totalReels: user.totalReels,
+        instagramReels: user.instagramReels,
+        youtubeReels: user.youtubeReels,
+        facebookReels: user.facebookReels,
+        snapchatReels: user.snapchatReels
+      }
+    });
+  } catch (error) {
+    console.error('Error syncing reels:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Get User Profile API
 app.get('/api/users/profile', authenticate, async (req, res) => {
   const firebaseUid = req.user.uid;

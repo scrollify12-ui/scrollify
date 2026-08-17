@@ -26,6 +26,8 @@ class ReelAccessibilityService : AccessibilityService() {
     )
     
     private var currentPackage = ""
+    private var currentReelViewerPackage: String? = null
+    
     private lateinit var sharedPrefs: SharedPreferences
 
     private var overlayView: View? = null
@@ -47,10 +49,24 @@ class ReelAccessibilityService : AccessibilityService() {
             if (packageName != currentPackage) {
                 detectors[currentPackage]?.reset()
                 currentPackage = packageName
+                
+                // If package changed, we definitely exited the reel viewer
+                if (currentReelViewerPackage != packageName) {
+                    currentReelViewerPackage = null
+                    hideOverlay()
+                }
             }
         }
         
-        val detector = detectors[packageName] ?: return
+        val detector = detectors[packageName]
+        if (detector == null) {
+            // Unrelated app, hide overlay if visible
+            if (currentReelViewerPackage != null) {
+                currentReelViewerPackage = null
+                hideOverlay()
+            }
+            return
+        }
         
         val rootNode = try { rootInActiveWindow } catch (e: Exception) { null }
         
@@ -64,16 +80,33 @@ class ReelAccessibilityService : AccessibilityService() {
             val appKey = getAppKey(packageName)
             val prefKey = "flutter.reels_$appKey"
             
-            if (result.inReelSection) {
-                if (result.isDetected) {
-                    incrementReelCount(packageName)
+            when (result.state) {
+                ViewerState.ENTERED_VIEWER -> {
+                    currentReelViewerPackage = packageName
+                    showOverlay()
+                    updateOverlayText(sharedPrefs.getLong(prefKey, 0L).toString())
                 }
-                
-                val currentCount = sharedPrefs.getLong(prefKey, 0L)
-                showOverlay()
-                updateOverlayText(currentCount.toString())
-            } else {
-                hideOverlay()
+                ViewerState.SCROLLED_NEW_CONTENT -> {
+                    currentReelViewerPackage = packageName
+                    incrementReelCount(packageName)
+                    showOverlay()
+                    updateOverlayText(sharedPrefs.getLong(prefKey, 0L).toString())
+                }
+                ViewerState.DUPLICATE_CONTENT -> {
+                    // Do nothing, but keep overlay visible
+                    currentReelViewerPackage = packageName
+                    showOverlay()
+                }
+                ViewerState.EXITED_VIEWER -> {
+                    if (currentReelViewerPackage == packageName) {
+                        currentReelViewerPackage = null
+                        hideOverlay()
+                    }
+                }
+                ViewerState.UNKNOWN -> {
+                    // Ignore unknown events. Crucially, DO NOT HIDE the overlay just because
+                    // one intermediate scroll event lacked the markers!
+                }
             }
             
             val counterAfter = sharedPrefs.getLong(prefKey, 0L)
@@ -82,11 +115,10 @@ class ReelAccessibilityService : AccessibilityService() {
             Log.d("ReelService", """
                 |==============================================
                 |Package: $packageName
-                |In Reel Section: ${result.inReelSection}
+                |Viewer State: ${result.state}
                 |Current Reel Identifier: ${result.reelIdentifier}
                 |Previous Reel Identifier: $previousId
-                |New Reel Detected: ${if (result.isDetected) "YES" else "NO"}
-                |Reason: ${if (result.isDetected) "New Unique Reel Content" else result.skipReason}
+                |Reason: ${result.skipReason}
                 |Counter: $counterAfter
                 |==============================================
             """.trimMargin())
@@ -117,6 +149,11 @@ class ReelAccessibilityService : AccessibilityService() {
         val dailyKey = "flutter.reelsScrolledToday"
         val dailyCount = sharedPrefs.getLong(dailyKey, 0L)
         sharedPrefs.edit().putLong(dailyKey, dailyCount + 1).apply()
+        
+        // Also queue for backend sync
+        val unSyncedKey = "flutter.unSyncedReels_$appKey"
+        val unSyncedCount = sharedPrefs.getLong(unSyncedKey, 0L)
+        sharedPrefs.edit().putLong(unSyncedKey, unSyncedCount + 1).apply()
     }
 
     override fun onInterrupt() {
@@ -165,7 +202,7 @@ class ReelAccessibilityService : AccessibilityService() {
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 PixelFormat.TRANSLUCENT
             )
             params.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL

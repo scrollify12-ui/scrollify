@@ -150,7 +150,13 @@ class _CompleteProfileScreenState extends ConsumerState<CompleteProfileScreen> {
         if (mounted) {
           setState(() {
             _isCheckingUsername = false;
-            _usernameStatusMessage = 'Unable to verify username. Please try again.';
+            // Catch the exact exception message and show it instead of a generic one.
+            String errMsg = e.toString();
+            // Clean up the exception prefix if present
+            if (errMsg.startsWith('Exception: ')) {
+              errMsg = errMsg.replaceFirst('Exception: ', '');
+            }
+            _usernameStatusMessage = 'Error: $errMsg';
             _usernameStatusColor = Colors.orangeAccent;
             _isUsernameAvailable = false;
           });
