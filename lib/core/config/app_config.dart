@@ -6,8 +6,8 @@ class AppConfig {
   AppConfig._();
 
   // ── App version (keep in sync with pubspec.yaml) ──────────────
-  static const String appVersion = '1.0.1';
-  static const int appBuildNumber = 2;
+  static const String appVersion = '1.0.3';
+  static const int appBuildNumber = 4;
 
   // ── Backend URLs ──────────────────────────────────────────────
   /// Use production URL on release builds and all web builds.

@@ -4,11 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'profile_repository.dart';
 
+import '../core/config/app_config.dart';
+
 class ApiProfileRepository implements ProfileRepository {
   final Dio _dio = Dio(BaseOptions(
-    baseUrl: 'http://192.168.1.5:3000/api', // Using PC's local Wi-Fi IP
-    connectTimeout: const Duration(seconds: 10),
-    receiveTimeout: const Duration(seconds: 10),
+    baseUrl: AppConfig.apiBaseUrl,
+    connectTimeout: const Duration(seconds: 60),
+    receiveTimeout: const Duration(seconds: 60),
   ));
   
   FirebaseAuth get _auth => FirebaseAuth.instance;
@@ -69,7 +71,7 @@ class ApiProfileRepository implements ProfileRepository {
 
     try {
       final response = await _dio.get(
-        '/users/check-username',
+        'users/check-username',
         queryParameters: {'username': username},
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
@@ -106,7 +108,7 @@ class ApiProfileRepository implements ProfileRepository {
 
     try {
       final response = await _dio.post(
-        '/auth/sync',
+        'auth/sync',
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',

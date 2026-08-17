@@ -31,13 +31,13 @@ class UserRepository {
     }
 
     try {
-      print('Sending GET /api/users/profile');
+      print('Sending GET api/users/profile');
       final response = await _dio.get(
-        '/users/profile',
+        'users/profile',
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
       
-      print('GET /api/users/profile');
+      print('GET api/users/profile');
       print('Status Code: ${response.statusCode}');
       print('Response Body: ${response.data}');
       

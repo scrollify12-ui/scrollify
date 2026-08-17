@@ -4,6 +4,7 @@ import '../models/app_usage_model.dart';
 import '../network/api_client.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dio/dio.dart';
+import '../core/config/app_config.dart';
 
 final statsRepositoryProvider = Provider<StatsRepository>((ref) {
   return StatsRepository(ref.watch(apiClientProvider));
@@ -26,13 +27,13 @@ class StatsRepository {
       
       final token = await user.getIdToken();
       final dio = Dio(BaseOptions(
-        baseUrl: 'http://192.168.1.5:3000/api', // Consistent with user_repository
-        connectTimeout: const Duration(seconds: 10),
+        baseUrl: AppConfig.apiBaseUrl,
+        connectTimeout: const Duration(seconds: 60),
       ));
 
       // Note: Endpoint and payload may need adjusting once backend is finalized
       await dio.post(
-        '/users/stats/increment',
+        'users/stats/increment',
         data: {'app': appName},
         options: Options(headers: {'Authorization': 'Bearer $token'}),
       );
